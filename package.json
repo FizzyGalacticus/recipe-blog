@@ -1,0 +1,17 @@
+{
+  "name": "recipe-blog",
+  "version": "1.0.0",
+  "description": "Hugo blog for storing recipes",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd src && hugo --gc --minify && cp -r docs ../docs && rm -rf docs",
+    "serve": "cd src && hugo serve -D"
+  },
+  "repository": "https://fizzygalacticus.github.io/recipe-blog",
+  "author": "Dustin L. Dodson",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "husky": "^4.2.5"
+  }
+}

@@ -4,6 +4,8 @@
     "images": [],
     "categories": [],
     "tags": [],
-    "authors": []
-    "description": ""
+    "authors": [],
+    "description": "",
+    "type": "pages",
+    "draft": true
 }

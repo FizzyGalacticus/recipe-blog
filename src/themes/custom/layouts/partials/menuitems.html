@@ -1,0 +1,6 @@
+{{ $current := . }}
+{{ range $current }}
+    <li class="nav-item{{ if .isCurrent }} active{{ end }}">
+        <a class="nav-link" href="{{ .menu.URL }}">{{ .menu.Name }}</a>
+    </li>
+{{ end }}

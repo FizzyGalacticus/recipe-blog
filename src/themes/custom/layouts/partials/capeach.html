@@ -1,0 +1,4 @@
+{{ $arr := split . " " }}
+{{ range $arr }}
+    {{ . | humanize -}}
+{{ end }}

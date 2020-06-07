@@ -1,68 +1,23 @@
 {{ define "main" }}
-    {{ $current := . }}
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center">{{ .Name }}</h1>
+            <h1 class="text-center">{{ .Title }}</h1>
         </div>
-        {{ if isset .Params "description" }}
+        {{ if isset .Params "image" }}
             <div class="col-12">
-                <h6 class="text-center">{{ .Params.description }}</h6>
+                <!-- header-image -->
             </div>
         {{ end }}
     </div>
     <div class="row d-flex justify-content-center">
-        {{ if isset .Params "prep" }}
-            <div class="col-sm-2 text-center">
-                <b>Prep:</b> {{ .Params.prep }} minutes
+        {{ if eq .Type "posts" }}
+            <div class="col-8">
+                {{ .Content }}
             </div>
-        {{ end }}
-        {{ if isset .Params "cook" }}
-            <div class="col-sm-2 text-center">
-                <b>Cook:</b> {{ .Params.cook }} minutes
+        {{ else }}
+            <div class="col-12">
+                {{ .Content }}
             </div>
         {{ end }}
     </div>
-    <hr>
-    <div class="row">
-        {{ if isset .Params "ingredients" }}
-            {{ if gt (len .Params.ingredients) 0 }}
-                <div class="col-sm-12 col-md-6">
-                    <h5 class="text-center">Ingredients</h5>
-                    <ul class="list-group">
-                    {{ range .Params.ingredients }}
-                        {{ $ingredient := . }}
-                        <a href="{{ $current.Site.BaseURL }}/ingredients/{{ . | anchorize }}" class="list-group-item list-group-item-action text-center">
-                            {{ if isset $current.Params "measurements" }}
-                                {{ range $key, $value := $current.Params.measurements }}
-                                    {{ if eq $key $ingredient }}
-                                        {{ $value }}
-                                    {{ end }}
-                                {{ end }}
-                            {{ end }}
-                            {{ $ingredient | humanize }}
-                        </a>
-                    {{ end }}
-                    </ul>
-                </div>
-            {{ end }}
-        {{ end }}
-        {{ if isset .Params "instructions" }}
-            {{ if gt (len .Params.instructions) 0 }}
-                <div class="col-sm-12 col-md-6">
-                    <h5 class="text-center">Instructions</h5>
-                    <ul class="list-group">
-                    {{ range $idx, $inst := .Params.instructions }}
-                        <li class="list-group-item">
-                            <input type="checkbox">
-                            &nbsp;
-                            {{ add $idx 1 }}. <span class="text-center">{{ $inst }}</span>
-                        </li>
-                    {{ end }}
-                    </ul>
-                </div>
-            {{ end }}
-        {{ end }}
-    </div>
-
-    {{ .Content }}
 {{ end }}

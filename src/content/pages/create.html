@@ -11,7 +11,7 @@
 }
 
 <script>
-    const createInputGroup = (text, colSize = '5') => {
+    const createInputGroup = (text, colSize = '5', value) => {
         const container = document.createElement('div');
         container.setAttribute('class', `col-${colSize}`);
 
@@ -30,6 +30,10 @@
         input.setAttribute('type', 'text');
         input.setAttribute('class', `form-control ${text}`);
 
+        if(value) {
+            input.value = value;
+        }
+
         prepend.appendChild(span);
 
         inputGroup.appendChild(prepend);
@@ -40,14 +44,14 @@
         return container;
     };
 
-    const addIngredientRow = () => {
+    const addIngredientRow = (name, measurement) => {
         const container = document.getElementById('ingredient-inputs');
 
         const row = document.createElement('div');
         row.setAttribute('class', 'row m-2 ingredients');
 
-        const nameContainer = createInputGroup('ingredient', '5');
-        const measurementContainer = createInputGroup('measurement', '5');
+        const nameContainer = createInputGroup('ingredient', '5', name);
+        const measurementContainer = createInputGroup('measurement', '5', measurement);
 
         const btnContainer = document.createElement('div');
         btnContainer.setAttribute('class', 'col-2');
@@ -67,13 +71,13 @@
         container.appendChild(row);
     };
 
-    const addInstructionRow = () => {
+    const addInstructionRow = (instruction) => {
         const container = document.getElementById('instruction-inputs');
 
         const row = document.createElement('div');
         row.setAttribute('class', 'row m-2 instructions');
 
-        const nameContainer = createInputGroup('instruction', '10');
+        const nameContainer = createInputGroup('instruction', '10', instruction);
 
         const btnContainer = document.createElement('div');
         btnContainer.setAttribute('class', 'col-2');
@@ -131,6 +135,20 @@
         navigator.clipboard.writeText(JSON.stringify(obj))
             .then(() => alert('copied to clipboard!'))
             .catch(err => alert(err.message));
+    };
+
+    document.body.onpaste = (e) => {
+        const data = (event.clipboardData || window.clipboardData).getData('text');
+
+        let instructions;
+
+        try {
+            instructions = JSON.parse(data);
+        } catch(err) {
+            instructions = data.split('\n');
+        }
+
+        instructions.forEach(i => addInstructionRow(i));
     };
 </script>
 

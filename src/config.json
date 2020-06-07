@@ -1,5 +1,5 @@
 {
-    "baseURL": "/",
+    "baseURL": "https://fizzygalacticus.github.io/recipe-blog",
     "publishdir": "docs",
     "languageCode": "en-us",
     "title": "Recipes",

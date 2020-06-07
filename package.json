@@ -4,7 +4,7 @@
   "description": "Hugo blog for storing recipes",
   "main": "index.js",
   "scripts": {
-    "build": "cd src && hugo --gc --minify && cp -r docs ../docs && rm -rf docs",
+    "build": "cd src && hugo --gc --minify && rm -rf ../docs && mv docs ../",
     "new": "cd src && hugo new",
     "recipe": "cd src && hugo new --kind recipe-bundle",
     "serve": "cd src && hugo serve -D"

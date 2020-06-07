@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-md-6 col-lg-4">
             <ul class="list-group">
                 {{ range .Pages }}
-                    <a href="{{ .RelPermalink }}" class="list-group-item list-group-item-action text-center">{{ .Name }}</a>
+                    <a href="{{ .Permalink }}" class="list-group-item list-group-item-action text-center">{{ .Name | humanize }}</a>
                 {{ end }}
             </ul>
         </div>

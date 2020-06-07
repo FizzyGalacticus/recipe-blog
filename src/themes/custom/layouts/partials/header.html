@@ -17,7 +17,7 @@
 
             {{ range $key, $values := .Site.Taxonomies }}
                 <li class="nav-item">
-                    <a class="nav-link" href="/{{ $key }}">{{ $key | humanize }}</a>
+                    <a class="nav-link" href="{{ $current.Site.BaseURL }}{{ $key }}">{{ $key | humanize }}</a>
                 </li>
             {{ end }}
         </ul>

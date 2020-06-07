@@ -15,8 +15,10 @@
                         {{ end }}
                         <div class="card-body">
                             <h5 class="card-title">{{ .Name }}</h5>
-                            {{ if isset .Params "author" }}
-                                <h6 class="card-subtitle text-muted">{{ .Params.author }}</h6>
+                            {{ if isset .Params "authors" }}
+                                {{ range $author := .Params.authors}}
+                                    <span class="card-subtitle text-muted">{{ $author }}</span>
+                                {{ end }}
                             {{ end }}
                             {{ if isset .Params "description"}}
                                 <p class="card-text">

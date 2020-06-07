@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "cd src && hugo --gc --minify && cp -r docs ../docs && rm -rf docs",
+    "new": "cd src && hugo new",
+    "recipe": "cd src && hugo new --kind recipe-bundle",
     "serve": "cd src && hugo serve -D"
   },
   "repository": "https://fizzygalacticus.github.io/recipe-blog",

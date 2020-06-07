@@ -1,0 +1,183 @@
+{
+    "title": "Create",
+    "date": "2020-06-06T23:26:31-07:00",
+    "draft": true
+}
+
+<script>
+    const createInputGroup = (text, colSize = '5') => {
+        const container = document.createElement('div');
+        container.setAttribute('class', `col-${colSize}`);
+
+        const inputGroup = document.createElement('div');
+        inputGroup.setAttribute('class', 'input-group');
+
+        const prepend = document.createElement('div');
+        prepend.setAttribute('class', 'input-group-prepend');
+
+        const span = document.createElement('span');
+        span.setAttribute('class', 'input-group-text');
+
+        span.innerText = text;
+
+        const input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('class', `form-control ${text}`);
+
+        prepend.appendChild(span);
+
+        inputGroup.appendChild(prepend);
+        inputGroup.appendChild(input);
+
+        container.appendChild(inputGroup);
+
+        return container;
+    };
+
+    const addIngredientRow = () => {
+        const container = document.getElementById('ingredient-inputs');
+
+        const row = document.createElement('div');
+        row.setAttribute('class', 'row m-2 ingredients');
+
+        const nameContainer = createInputGroup('ingredient', '5');
+        const measurementContainer = createInputGroup('measurement', '5');
+
+        const btnContainer = document.createElement('div');
+        btnContainer.setAttribute('class', 'col-2');
+
+        const removeBtn = document.createElement('button');
+        removeBtn.setAttribute('class', 'btn btn-danger');
+        removeBtn.innerText = 'Remove';
+
+        removeBtn.onclick = () => row.remove();
+
+        btnContainer.appendChild(removeBtn);
+
+        row.appendChild(nameContainer);
+        row.appendChild(measurementContainer);
+        row.appendChild(btnContainer);
+
+        container.appendChild(row);
+    };
+
+    const addInstructionRow = () => {
+        const container = document.getElementById('instruction-inputs');
+
+        const row = document.createElement('div');
+        row.setAttribute('class', 'row m-2 instructions');
+
+        const nameContainer = createInputGroup('instruction', '10');
+
+        const btnContainer = document.createElement('div');
+        btnContainer.setAttribute('class', 'col-2');
+
+        const removeBtn = document.createElement('button');
+        removeBtn.setAttribute('class', 'btn btn-danger');
+        removeBtn.innerText = 'Remove';
+
+        removeBtn.onclick = () => row.remove();
+
+        btnContainer.appendChild(removeBtn);
+
+        row.appendChild(nameContainer);
+        row.appendChild(btnContainer);
+
+        container.appendChild(row);
+    };
+
+    const generate = () => {
+        const ingredientRows = document.getElementsByClassName('ingredients');
+        const instructionRows = document.getElementsByClassName('instructions');
+
+        const ingredients = [];
+        const measurements = {};
+        const instructions = [];
+
+        for(const row of ingredientRows) {
+            const [ingredientInput] = row.getElementsByClassName('ingredient');
+            const [measurementInput] = row.getElementsByClassName('measurement');
+
+            const ingredient = ingredientInput && ingredientInput.value.toLowerCase();
+            const measurement = measurementInput && measurementInput.value.toLowerCase();
+
+            ingredients.push(ingredient);
+            
+            if(measurement) {
+                measurements[ingredient] = measurement;
+            }
+        }
+
+        for(const row of instructionRows) {
+            const [input] = row.getElementsByClassName('instruction');
+
+            instructions.push(input.value);
+        }
+
+        const obj = {
+            ingredients,
+            measurements,
+            instructions,
+            prep: parseInt(document.getElementById('prep').value, 10),
+            cook: parseInt(document.getElementById('cook').value, 10),
+        };
+
+        navigator.clipboard.writeText(JSON.stringify(obj))
+            .then(() => alert('copied to clipboard!'))
+            .catch(err => alert(err.message));
+    };
+</script>
+
+<h4 class="text-center">Meta</h4>
+<div class="row d-flex justify-content-center">
+    <div class="col-6">
+        <div class="input-group m-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Prep Time</span>
+            </div>
+            <input id="prep" type="number" class="form-control">
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="input-group m-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Cook Time</span>
+            </div>
+            <input id="cook" type="number" class="form-control">
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div id="ingredient-inputs" style="width: 100%;"></div>
+
+<div class="row">
+    <div class="col-12">
+        <h4 class="text-center">Ingredients</h4>
+    </div>
+    <div class="col-10"></div>
+    <div class="col-2">
+        <button class="btn btn-primary" onclick="addIngredientRow()">Add Ingredient</button>
+    </div>
+</div>
+
+<hr>
+
+<div id="instruction-inputs" style="width: 100%;"></div>
+
+<div class="row">
+    <div class="col-12">
+        <h4 class="text-center">Instructions</h4>
+    </div>
+    <div class="col-10"></div>
+    <div class="col-2">
+        <button class="btn btn-primary" onclick="addInstructionRow()">Add Instruction</button>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-1">
+        <button class="btn btn-success" onclick="generate()">Generate</button>
+    </div>
+</div>

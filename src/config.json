@@ -1,0 +1,28 @@
+{
+    "baseURL": "/",
+    "publishdir": "docs",
+    "languageCode": "en-us",
+    "title": "Recipes",
+    "theme": "custom",
+    "summaryLength": "7",
+    "paginate": 6,
+    "enableGitInfo": true,
+    "taxonomies": {
+        "tag": "tags",
+        "category": "categories",
+        "author": "authors",
+        "authors": "authors",
+        "ingredients": "ingredients"
+    },
+    "params": {
+        "share": true
+    },
+    "menu": {
+        "main": [
+            {
+                "name": "Home",
+                "url": "/"
+            }
+        ]
+    }
+  }

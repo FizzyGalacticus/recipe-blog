@@ -1,0 +1,17 @@
+{{ define "main" }}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">{{ .Title }}</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <ul class="list-group">
+                {{ range .Pages }}
+                    <a href="{{ .RelPermalink }}" class="list-group-item list-group-item-action text-center">{{ .Name }}</a>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+{{ end }}

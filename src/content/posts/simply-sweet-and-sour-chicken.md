@@ -2,7 +2,7 @@
     "title": "Simply Sweet and Sour Chicken",
     "date": "2020-06-07T15:52:33-07:00",
     "images": [],
-    "categories": [],
+    "categories": ["dinner"],
     "tags": [],
     "authors": ["Carissa Moses"],
     "description": "",

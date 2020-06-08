@@ -108,8 +108,8 @@
             const [ingredientInput] = row.getElementsByClassName('ingredient');
             const [measurementInput] = row.getElementsByClassName('measurement');
 
-            const ingredient = ingredientInput && ingredientInput.value.toLowerCase();
-            const measurement = measurementInput && measurementInput.value.toLowerCase();
+            const ingredient = ingredientInput && ingredientInput.value.toLowerCase().trim();
+            const measurement = measurementInput && measurementInput.value.toLowerCase().trim();
 
             ingredients.push(ingredient);
             
@@ -121,18 +121,18 @@
         for(const row of instructionRows) {
             const [input] = row.getElementsByClassName('instruction');
 
-            instructions.push(input.value);
+            instructions.push(input.value.trim());
         }
 
         const obj = {
             ingredients,
             measurements,
             instructions,
-            prep: parseInt(document.getElementById('prep').value, 10),
-            cook: parseInt(document.getElementById('cook').value, 10),
+            prep: parseInt(document.getElementById('prep').value, 10) || undefined,
+            cook: parseInt(document.getElementById('cook').value, 10) || undefined,
         };
 
-        navigator.clipboard.writeText(JSON.stringify(obj))
+        navigator.clipboard.writeText(JSON.stringify(obj, null, 4))
             .then(() => alert('copied to clipboard!'))
             .catch(err => alert(err.message));
     };

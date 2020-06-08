@@ -3,7 +3,7 @@
     "date": "2020-06-06T18:48:26-07:00",
     "images": [],
     "categories": [
-        "soup"
+        "dinner"
     ],
     "tags": [
         "hearty"
